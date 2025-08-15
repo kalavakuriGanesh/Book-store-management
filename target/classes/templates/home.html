@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Book Store | Home</title>
+    <style>
+      body {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2eafc 100%);
+        min-height: 100vh;
+      }
+      .feature-card {
+        border: none;
+        border-radius: 1rem;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+        transition: transform 0.2s;
+      }
+      .feature-card:hover {
+        transform: translateY(-5px) scale(1.03);
+        box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+      }
+      .navbar-brand {
+        font-weight: bold;
+        letter-spacing: 1px;
+      }
+      .btn-gradient {
+        background: linear-gradient(90deg, #4f8cff 0%, #38c172 100%);
+        color: #fff;
+        border: none;
+      }
+      .btn-gradient:hover {
+        background: linear-gradient(90deg, #38c172 0%, #4f8cff 100%);
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Book Store</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="available_books">Available Books</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="my_books">My Books</a>
+            </li>
+          </ul>
+          <div class="d-flex">
+            <!-- Only show to admin -->
+            <th:block th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+              <a class="btn btn-outline-light me-2" href="book_register">Add New Book</a>
+            </th:block>
+            <a class="btn btn-danger" href="/logout">Logout</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container py-5">
+      <div class="row justify-content-center mb-4">
+        <div class="col-lg-8 text-center">
+          <h1 class="display-4 fw-bold mb-3 text-primary">Welcome to the Book Store!</h1>
+          <p class="lead text-secondary mb-4">
+            Your one-stop solution to manage, explore, and organize your book collection efficiently.
+          </p>
+          <div class="d-flex flex-wrap justify-content-center gap-3 mb-4">
+            <a href="available_books" class="btn btn-gradient btn-lg px-4">Browse Books</a>
+            <a href="my_books" class="btn btn-outline-primary btn-lg px-4">My Book List</a>
+            <a href="book_register" class="btn btn-outline-success btn-lg px-4">Add New Book</a>
+            <a href="/export/excel" class="btn btn-outline-info btn-lg px-4">Export to Excel</a>
+          </div>
+        </div>
+      </div>
+      <div class="row g-4 justify-content-center">
+        <div class="col-md-4">
+          <div class="card feature-card h-100 text-center p-4">
+            <div class="mb-3">
+              <span class="fs-1 text-primary"><i class="bi bi-journal-plus"></i></span>
+            </div>
+            <h5 class="fw-bold mb-2">Book Management</h5>
+            <p class="text-muted mb-0">Add, edit, and delete books with a user-friendly interface.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card feature-card h-100 text-center p-4">
+            <div class="mb-3">
+              <span class="fs-1 text-success"><i class="bi bi-search"></i></span>
+            </div>
+            <h5 class="fw-bold mb-2">Smart Search & Filter</h5>
+            <p class="text-muted mb-0">Quickly find books by name or author and filter your collection.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card feature-card h-100 text-center p-4">
+            <div class="mb-3">
+              <span class="fs-1 text-info"><i class="bi bi-file-earmark-excel"></i></span>
+            </div>
+            <h5 class="fw-bold mb-2">Export to Excel</h5>
+            <p class="text-muted mb-0">Download your book list as an Excel file for offline access.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card feature-card h-100 text-center p-4">
+            <div class="mb-3">
+              <span class="fs-1 text-warning"><i class="bi bi-bookmark-heart"></i></span>
+            </div>
+            <h5 class="fw-bold mb-2">Personal Book List</h5>
+            <p class="text-muted mb-0">Maintain your own personalized list of favorite books.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card feature-card h-100 text-center p-4">
+            <div class="mb-3">
+              <span class="fs-1 text-danger"><i class="bi bi-shield-lock"></i></span>
+            </div>
+            <h5 class="fw-bold mb-2">Secure Access</h5>
+            <p class="text-muted mb-0">Your data is protected with secure authentication and encryption.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer mt-auto py-3 bg-light">
+      <div class="container text-center">
+        <span class="text-muted">Book Store Management System &copy; 2025</span>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS and Bootstrap Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  </body>
+</html>
